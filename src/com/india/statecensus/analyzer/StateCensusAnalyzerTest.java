@@ -1,6 +1,6 @@
 package com.india.statecensus.analyzer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class StateCensusAnalyzerTest {
 	 * @throws StateCensusAnalyzerException
 	 ***/
 	@Test
-	public void givenTheStateCodesCsvFile_IfHasCorrectNumberOfRecords_ShouldReturnTrue()
+	public void givenCsvFile_IfHasCorrectNumberOfRecords_ShouldReturnTrue()
 			throws CsvValidationException, IOException, StateCensusAnalyzerException {
 
 		stateCensusAnalyzer.readingFromCSV("IndiaStateCensusData.csv");
@@ -35,14 +35,31 @@ public class StateCensusAnalyzerTest {
 	/***
 	 * T.C-1.2 :- Given the State Census CSV File if incorrect Returns a custom
 	 * Exception.
+	 * 
 	 * @throws IOException 
+	 * @throws CsvValidationException 
 	 ***/
 	@Test
-	public void givenCsvFile_IfDoesntExist_ShouldThrowStateCensusAnalyserException() throws IOException {
+	public void givenCsvFile_IfDoesntExist_ShouldThrowCustomException() throws IOException, CsvValidationException {
 		try {
 			stateCensusAnalyzer.readingFromCSV("IndiaStateCensus.csv");
 		} catch(StateCensusAnalyzerException ex) {
 			ex.printStackTrace();
+		}
+	}
+	
+	/***
+	 * T.C-1.3 :- Given the State Census CSV File when correct but type incorrect
+	 * Returns a custom Exception.
+	 * 
+	 * @throws CsvValidationException 
+	 ***/
+	@Test
+	public void givenCsvFile_IfIncorrectType_ShouldThrowCustomException() throws CsvValidationException {
+		try {
+			stateCensusAnalyzer.readingFromCSV("IndiaStateCensusWrongData.csv");
+		} catch (StateCensusAnalyzerException | IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
