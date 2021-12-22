@@ -1,6 +1,7 @@
 package com.india.statecensus.analyzer;
 
 public class CSVStateCensus {
+	
 	/** Instance variables. **/
 	public String stateName;
 	public long population;
