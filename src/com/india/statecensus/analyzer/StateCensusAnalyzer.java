@@ -20,7 +20,11 @@ public class StateCensusAnalyzer {
 			String[] data;
 			data = csvReader.readNext();
 			while ((data = csvReader.readNext()) != null) {
-				csvStateCensus.add(new CSVStateCensus(data[0],Long.parseLong(data[1]),Integer.parseInt(data[2]),Double.parseDouble(data[3])));
+				if(data.length != 4) {
+					throw new StateCensusAnalyzerException(StateCensusAnalyzerException.exception_type.DELIMITER_ISSUE + " OOPS! Delimiter issue is there.");
+				} else {
+					csvStateCensus.add(new CSVStateCensus(data[0],Long.parseLong(data[1]),Integer.parseInt(data[2]),Double.parseDouble(data[3])));
+				}
 			}
 			csvReader.close();
 		} catch (FileNotFoundException e) {

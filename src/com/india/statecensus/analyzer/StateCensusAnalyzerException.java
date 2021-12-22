@@ -5,8 +5,8 @@ public class StateCensusAnalyzerException extends Exception{
 	/*** enum ***/
 	public enum exception_type {
 		NO_SUCH_FILE,
-		INCORRECT_TYPE;
-		
+		INCORRECT_TYPE,
+		DELIMITER_ISSUE;
 	}
 	
 	public StateCensusAnalyzerException(String message) {

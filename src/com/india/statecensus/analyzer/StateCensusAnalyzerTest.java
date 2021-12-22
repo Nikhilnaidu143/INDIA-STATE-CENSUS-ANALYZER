@@ -62,4 +62,20 @@ public class StateCensusAnalyzerTest {
 			e.printStackTrace();
 		}
 	}
+	
+	/***
+	 * T.C-1.4 :- Given the State Census CSV File when correct but delimiter
+	 * incorrect Returns a custom Exception.
+	 * 
+	 * @throws IOException 
+	 * @throws CsvValidationException 
+	 ***/
+	@Test
+	public void givenCsvFile_ifThereISDelimiterIssue_ShouldThrowCustomException() throws CsvValidationException, IOException {
+		try {
+			stateCensusAnalyzer.readingFromCSV("IndiaStateCensusDataWrongDelimiter.csv");
+		} catch(StateCensusAnalyzerException e) {
+			e.printStackTrace();
+		}
+	}
 }
