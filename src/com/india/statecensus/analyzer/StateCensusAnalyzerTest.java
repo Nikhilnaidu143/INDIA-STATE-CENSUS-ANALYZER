@@ -28,7 +28,7 @@ public class StateCensusAnalyzerTest {
 	public void givenCsvFile_IfHasCorrectNumberOfRecords_ShouldReturnTrue()
 			throws CsvValidationException, IOException, StateCensusAnalyzerException {
 
-		stateCensusAnalyzer.readingFromCSV("IndiaStateCensusData.csv");
+		stateCensusAnalyzer.readingFromCSV("StateCensusFiles/IndiaStateCensusData.csv");
 		assertEquals(true, stateCensusAnalyzer.checkingNumOfRecords());
 	}
 
@@ -42,7 +42,7 @@ public class StateCensusAnalyzerTest {
 	@Test
 	public void givenCsvFile_IfDoesntExist_ShouldThrowCustomException() throws IOException, CsvValidationException {
 		try {
-			stateCensusAnalyzer.readingFromCSV("IndiaStateCensus.csv");
+			stateCensusAnalyzer.readingFromCSV("StateCensusFiles/IndiaStateCensus.csv");
 		} catch (StateCensusAnalyzerException ex) {
 			ex.printStackTrace();
 		}
@@ -57,7 +57,7 @@ public class StateCensusAnalyzerTest {
 	@Test
 	public void givenCsvFile_IfIncorrectType_ShouldThrowCustomException() throws CsvValidationException {
 		try {
-			stateCensusAnalyzer.readingFromCSV("IndiaStateCensusWrongData.csv");
+			stateCensusAnalyzer.readingFromCSV("StateCensusFiles/IndiaStateCensusWrongData.csv");
 		} catch (StateCensusAnalyzerException | IOException e) {
 			e.printStackTrace();
 		}
@@ -75,7 +75,7 @@ public class StateCensusAnalyzerTest {
 			throws CsvValidationException, IOException {
 		
 		try {
-			stateCensusAnalyzer.readingFromCSV("IndiaStateCensusDataWrongDelimiter.csv");
+			stateCensusAnalyzer.readingFromCSV("StateCensusFiles/IndiaStateCensusDataWrongDelimiter.csv");
 		} catch (StateCensusAnalyzerException e) {
 			e.printStackTrace();
 		}
@@ -93,7 +93,92 @@ public class StateCensusAnalyzerTest {
 			throws CsvValidationException, IOException {
 		
 		try {
-			stateCensusAnalyzer.readingFromCSV("IndiaStateCensusDataWrongHeader.csv");
+			stateCensusAnalyzer.readingFromCSV("StateCensusFiles/IndiaStateCensusDataWrongHeader.csv");
+		} catch (StateCensusAnalyzerException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/****---------------------------UC-2----------------------------------****/
+	
+	/***
+	 * T.C-2.1 :- Given the States Census CSV file, Check to ensure the Number of
+	 * Record matches.
+	 * @throws IOException 
+	 * @throws StateCensusAnalyzerException 
+	 * @throws CsvValidationException 
+	 ***/
+	@Test
+	public void givenStateCodeCsvFile_IfHasCorrectNumOfRecords_ShouldReturnTrue()
+			throws CsvValidationException, StateCensusAnalyzerException, IOException {
+		
+		stateCensusAnalyzer.readingFromCSV("StateCodeFiles/IndiaStateCode.csv");
+		assertEquals(true , stateCensusAnalyzer.checkingNumOfRecordsForStateCodeCsv());
+	}
+	
+	/***
+	 * T.C-2.2 :- Given the State Census CSV File if incorrect Returns a custom
+	 * Exception.
+	 * 
+	 * @throws IOException
+	 * @throws CsvValidationException
+	 ***/
+	@Test
+	public void givenStateCodeCsvFile_IfDoesntExist_ShouldThrowCustomException() throws IOException, CsvValidationException {
+		try {
+			stateCensusAnalyzer.readingFromCSV("StateCodeFiles/IndiaStateCodeData.csv");
+		} catch (StateCensusAnalyzerException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	/***
+	 * T.C-2.3 :- Given the State Census CSV File when correct but type incorrect
+	 * Returns a custom Exception.
+	 * 
+	 * @throws CsvValidationException
+	 ***/
+	@Test
+	public void givenStateCodeCsvFile_IfIncorrectType_ShouldThrowCustomException() throws CsvValidationException {
+		try {
+			stateCensusAnalyzer.readingFromCSV("StateCodeFiles/IndiaStateCodeWrongData.csv");
+		} catch (StateCensusAnalyzerException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/***
+	 * T.C-2.4 :- Given the State Census CSV File when correct but delimiter
+	 * incorrect Returns a custom Exception.
+	 * 
+	 * @throws IOException
+	 * @throws CsvValidationException
+	 ***/
+	@Test
+	public void givenStateCodeCsvFile_IfThereISDelimiterIssue_ShouldThrowCustomException()
+			throws CsvValidationException, IOException {
+		
+		try {
+			stateCensusAnalyzer.readingFromCSV("StateCodeFiles/IndiaStateCodeWrongDelimiter.csv");
+		} catch (StateCensusAnalyzerException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/***
+	 * T.C-2.5 :- Given the State Census CSV File when correct but csv header
+	 * incorrect Returns a custom Exception.
+	 * 
+	 * @throws IOException
+	 * @throws CsvValidationException
+	 ***/
+	@Test
+	public void givenStateCodeCsvFile_IfHeaderIsNotCorrect_ShouldThrowCustomException()
+			throws CsvValidationException, IOException {
+		
+		try {
+			stateCensusAnalyzer.readingFromCSV("StateCodeFiles/IndiaStateCodeWrongHeader.csv");
 		} catch (StateCensusAnalyzerException e) {
 			e.printStackTrace();
 		}
